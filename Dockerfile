@@ -17,5 +17,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Run your app
 EXPOSE 8000
-CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-8000} --timeout 120"]
+CMD ["sh", "-c", "echo 'Container started'; ls -l; python -m flask --version; sleep 600"]
+
 
