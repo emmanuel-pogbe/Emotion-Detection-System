@@ -1,5 +1,5 @@
-from deepface import DeepFace
-DeepFace.build_model('VGG-Face')
+# from deepface import DeepFace
+# DeepFace.build_model('VGG-Face')
 
 
-print("Models preloaded successfully!")
+# print("Models preloaded successfully!")
