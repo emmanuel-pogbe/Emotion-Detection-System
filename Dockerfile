@@ -1,22 +1,24 @@
+# Use an official Python image
 FROM python:3.11-slim
 
-# Install required system libraries
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libgl1 \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
+# Create and switch to /app
 WORKDIR /app
 
-# Copy project files
-COPY . .
+# Copy everything into the container
+COPY . /app
 
-# Install Python dependencies
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Run your app
+# Expose a port (for clarity only)
 EXPOSE 8000
-CMD ["sh", "-c", "echo 'Container started'; ls -l; python -m flask --version; sleep 600"]
 
-
+# Debug: show files and sleep for a while
+CMD ["sh", "-c", "echo 'Container started ✅'; pwd; ls -la; sleep 600"]
