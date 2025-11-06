@@ -17,6 +17,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 # Create upload folder if it doesn't exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+@app.route('/')
+def index():
+    """Serve the main HTML page"""
+    # In production, serve your HTML file here
+    return render_template("index.html")
 
 # Store results in memory (use database in production)
 db.create_table()
@@ -136,12 +141,7 @@ def serve_upload(filename):
     from flask import send_from_directory
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-@app.route('/')
-def index():
-    """Serve the main HTML page"""
-    # In production, serve your HTML file here
-    return render_template("index.html")
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+# if __name__ == '__main__':
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host='0.0.0.0', port=port, debug=False)
