@@ -7,6 +7,7 @@ from datetime import datetime
 
 import db
 
+import sys; print("Flask app imported successfully!", file=sys.stderr, flush=True)
 app = Flask(__name__,template_folder="templates")
 
 # Configuration
