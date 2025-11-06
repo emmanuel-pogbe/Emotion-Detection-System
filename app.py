@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import uuid
 from datetime import datetime
-import model
+
 
 import db
 
@@ -39,6 +39,7 @@ def process_image_with_ai(image_path):
     # Example with a hypothetical model:
     # model = load_model('your_model.h5')
     # prediction = model.predict(image_path)
+    import model
     emotion = model.analyze_emotion(image_path=image_path)
     # Simulated result
     result = {
