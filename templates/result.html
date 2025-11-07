@@ -12,20 +12,20 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1a1f36;
             min-height: 100vh;
             padding: 40px 20px;
         }
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: white;
+            background: #2d3250;
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
         h1 {
-            color: #333;
+            color: #ffffff;
             margin-bottom: 30px;
             text-align: center;
         }
@@ -41,7 +41,7 @@
             margin: 0 auto 30px;
         }
         .result-data {
-            background: #f8f9fa;
+            background: #373d5c;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -51,18 +51,18 @@
         }
         .result-label {
             font-weight: 600;
-            color: #667eea;
+            color: #7fd1ae;
             margin-bottom: 5px;
         }
         .result-value {
-            color: #333;
+            color: #ffffff;
             font-size: 1.1em;
         }
         .btn {
             display: inline-block;
             padding: 15px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #7fd1ae;
+            color: #1a1f36;
             text-decoration: none;
             border-radius: 10px;
             font-weight: 600;
@@ -70,6 +70,7 @@
         }
         .btn:hover {
             transform: translateY(-2px);
+            background: #6abf9a;
         }
         .labels-list {
             display: flex;
@@ -78,8 +79,8 @@
             margin-top: 10px;
         }
         .label-tag {
-            background: #667eea;
-            color: white;
+            background: #7fd1ae;
+            color: #1a1f36;
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9em;
@@ -88,7 +89,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🤖 AI Processing Result</h1>
+        <h1>    </h1>
         
         <div class="result-section">
             <img src="/uploads/{{ filename }}" alt="Uploaded image" class="result-image">
@@ -111,7 +112,7 @@
             </div>
         </div>
         
-        <a href="/" class="btn">📸 Process Another Image</a>
+        <a href="/" class="btn">Process Another Image</a>
     </div>
 </body>
 </html>

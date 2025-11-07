@@ -7,7 +7,6 @@ from datetime import datetime
 
 import db
 
-import sys; print("Flask app imported successfully!", file=sys.stderr, flush=True)
 app = Flask(__name__,template_folder="templates")
 
 # Configuration
@@ -145,5 +144,5 @@ def serve_upload(filename):
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port, debug=False)
