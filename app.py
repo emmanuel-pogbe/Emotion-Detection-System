@@ -144,6 +144,4 @@ def serve_upload(filename):
 
 
 if __name__ == '__main__':
-    print("PORT from environment:", os.environ.get("PORT"), flush=True)
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=8000, debug=False)
