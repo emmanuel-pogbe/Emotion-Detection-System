@@ -144,4 +144,7 @@ def serve_upload(filename):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000, debug=False)
+    # use Railway's assigned port if available, else fallback
+    port = int(os.environ.get("PORT", 8000))
+    print(f"🚀 Starting Flask on port {port}")
+    app.run(host='0.0.0.0', port=port)
