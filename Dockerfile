@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose a port (for clarity only)
 EXPOSE 8000
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8000} --workers 1 --timeout 300 --log-level debug app:app"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8000} --workers 1 --timeout 600 --log-level debug app:app"]

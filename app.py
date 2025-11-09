@@ -21,7 +21,8 @@ from datetime import datetime
 logger.info("✅ Flask imports successful")
 try:
     import db
-    logger.info("✅ Database module imported")
+    import model
+    logger.info("✅ Database module imported and model")
 except Exception as e:
     logger.error(f"❌ Failed to import db: {e}", exc_info=True)
     raise
@@ -57,7 +58,6 @@ def process_image_with_ai(image_path):
     # Example with a hypothetical model:
     # model = load_model('your_model.h5')
     # prediction = model.predict(image_path)
-    import model
     emotion = model.analyze_emotion(image_path=image_path)
     # Simulated result
     result = {
