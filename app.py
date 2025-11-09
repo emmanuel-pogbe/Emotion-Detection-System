@@ -1,12 +1,33 @@
+import sys
+import logging
+
+# Configure logging FIRST
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    stream=sys.stdout
+)
+logger = logging.getLogger(__name__)
+
+logger.info("=" * 50)
+logger.info("🚀 Starting application initialization...")
+logger.info("=" * 50)
+
 from flask import Flask, request, jsonify, render_template_string,render_template
 import os
 import uuid
 from datetime import datetime
 
-
-import db
+logger.info("✅ Flask imports successful")
+try:
+    import db
+    logger.info("✅ Database module imported")
+except Exception as e:
+    logger.error(f"❌ Failed to import db: {e}", exc_info=True)
+    raise
 
 app = Flask(__name__,template_folder="templates")
+logger.info("✅ Flask app created")
 filepath = ""
 # Configuration
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
@@ -135,7 +156,7 @@ def serve_upload(filename):
     from flask import send_from_directory
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-
+logger.info("✅ Application initialization complete!")
 # if __name__ == '__main__':
 #     port = int(os.environ.get("PORT", 8000))
 #     print(f"🚀 Starting Flask on port {port}")
