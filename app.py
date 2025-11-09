@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template_string,render_template
-from werkzeug.utils import secure_filename
 import os
 import uuid
 from datetime import datetime
@@ -8,23 +7,21 @@ from datetime import datetime
 import db
 
 app = Flask(__name__,template_folder="templates")
-
+filepath = ""
 # Configuration
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 # Create upload folder if it doesn't exist
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @app.route('/')
 def index():
     """Serve the main HTML page"""
     # In production, serve your HTML file here
     return render_template("index.html")
 
-# Store results in memory (use database in production)
-db.create_table()
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -52,6 +49,7 @@ def process_image_with_ai(image_path):
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
+    global filepath
     """Handle image upload and trigger AI processing"""
     
     if 'image' not in request.files:
@@ -64,6 +62,8 @@ def upload_image():
     
     if file and allowed_file(file.filename):
         try:
+            db.create_table()
+            
             # Generate unique filename
             file_ext = file.filename.rsplit('.', 1)[1].lower()
             unique_filename = f"{uuid.uuid4()}.{file_ext}"
@@ -82,14 +82,7 @@ def upload_image():
             
             # Process image with AI model
             ai_result = process_image_with_ai(filepath)
-            
-            # Store result
-            import json
-            db.save_result(result_id=str(result_id),
-                           image_path=str(filepath),
-                           filename=str(unique_filename),
-                           result=json.dumps(ai_result),
-                           uploaded_at=str(datetime.now().isoformat()))
+
             # Store result in database
             import json
             try:
@@ -143,8 +136,8 @@ def serve_upload(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8000))
-    print(f"🚀 Starting Flask on port {port}")
-    print(f"📍 Binding to 0.0.0.0:{port}")
-    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
+# if __name__ == '__main__':
+#     port = int(os.environ.get("PORT", 8000))
+#     print(f"🚀 Starting Flask on port {port}")
+#     print(f"📍 Binding to 0.0.0.0:{port}")
+#     app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
